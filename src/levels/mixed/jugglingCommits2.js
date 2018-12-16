@@ -9,7 +9,7 @@ exports.level = {
   "goalAsserts": {
     "master": [
       function(data) {
-        return data.C2 > data.C3;
+        return data.C2 >= data.C3;
       },
       function(data) {
         return data.C2 > data.C1;
@@ -24,9 +24,10 @@ exports.level = {
     "pt_BR": "Malabarismo com commits #2",
     "de_DE": "Jonglieren mit Commits Teil 2",
     "ja": "コミットをやりくりする その2",
-    "zh_CN": "提交交换戏法 #2",
+    "zh_CN": "提交的技巧 #2",
     "zh_TW": "commit 的戲法 #2",
-    "ru_RU": "Жонглируем коммитами №2"
+    "ru_RU": "Жонглируем коммитами №2",
+    "uk": "Жонглюємо комітами #2"
   },
   "hint": {
     "en_US": "Don't forget to forward master to the updated changes!",
@@ -38,7 +39,8 @@ exports.level = {
     "ko": "master를 변경 완료한 커밋으로 이동(forward)시키는 것을 잊지 마세요!",
     "zh_CN": "别忘记了将 master 快进到最新的更新上！",
     "zh_TW": "別忘記了將 master 推到最新的 commit 上面！",
-    "ru_RU": "Не забудь переместить master на последние изменения."
+    "ru_RU": "Не забудь переместить master на последние изменения.",
+    "uk": "Не забудь перемістити master на останні зміни!"
   },
   "startDialog": {
     "en_US": {
@@ -250,7 +252,7 @@ exports.level = {
             "markdowns": [
               "In diesem Level geht es also auch um das Ziel den Commit `C2` zu modifizieren, aber ohne `git rebase -i` zu benutzen. Ich überlass es dir herauszufinden, wie das gehen soll. :D",
               "",
-              "Nicht vergessen, die genaue Anzahl von Kopien (d.h. Apostrophs) ist nicht ausschlaggebend, nur die Differenz. Der Level ist zum Beispiel auch gelöst, wenn dein fertiger Baum dieselbe Struktur wie der Ziel-Baum hat, aber *überall* ein Apostroph mehr aufweist."
+              "Nicht vergessen, die genaue Anzahl von Kopien (d.h. Apostrophen) ist nicht ausschlaggebend, nur die Differenz. Der Level ist zum Beispiel auch gelöst, wenn dein fertiger Baum dieselbe Struktur wie der Ziel-Baum hat, aber *überall* ein Apostroph mehr aufweist."
             ]
           }
         }
@@ -303,13 +305,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## 提交变换戏法 #2",
+              "## 提交的技巧 #2",
               "",
-              "*假如你还没有完成提交变换戏法 #1（前一关），这关不让玩哦！*",
+              "*如果你还没有完成“提交的技巧 #1”（前一关）的话，请选通过以后再来！*",
               "",
-              "如你在上一关所见，我们使用 `rebase -i` 来重排那些提交。只要把我们想要的提交挪到最顶端，我们就可以很容易地改变它，然后把它们重新排成我们想要的顺序。",
+              "正如你在上一关所见到的，我们可以使用 `rebase -i` 对提交记录进行重新排序。只要把我们想要的提交记录挪到最前端，我们就可以很轻松的用 `--amend` 修改它，然后把它们重新排成我们想要的顺序。",
               "",
-              "但唯一的问题就是这样做就要排很多次，有可能造成衍合冲突（rebase conflicts）。下面就看看用另外一种方法 `git cherry-pick` 是怎么做的吧。"
+              "但这样做就唯一的问题就是要进行两次排序，而这有可能造成由 rebase 而导致的冲突。下面还是看看 `git cherry-pick` 是怎么做的吧。"
             ]
           }
         },
@@ -317,13 +319,13 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "要在心理牢记 cherry-pick 可以从提交树的任何地方拿一个提交来放在 HEAD 上（尽管那个提交不在上游）。",
+              "要在心里牢记 cherry-pick 可以将提交树上任何地方的提交记录取过来追加到 HEAD 上（只要不是 HEAD 上游的提交就没问题）。",
               "",
-              "下面是一个小小的演示："
+              "来看看这个例子："
             ],
             "command": "git cherry-pick C2",
             "afterMarkdowns": [
-              "好滴咧，我们继续"
+              "看到了吧？我们继续"
             ],
             "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
           }
@@ -332,7 +334,9 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "那么这关呢，和上一关一样要改变提交 `C2`，但你要避免使用 `rebase -i`。自己想想要怎么解决吧，骚年！ :D"
+              "这一关的目标和上一关一样，通过 `--amend` 改变提交记录 `C2`，但你不能用 `rebase -i`。自己想想要怎么解决吧！ :D",
+              "",
+              "对了，提交记录上面的`'`的数量并不重要，只是引用的不同而已。也就是说如果你的最终结果在某个提交记录上多了个`'`，我也会算你通过的。"
             ]
           }
         }
@@ -428,11 +432,11 @@ exports.level = {
             "markdowns": [
               "## Жонглируем коммитами №2",
               "",
-              "*Перед прохождением этого уровня обязательно надо пройти предыдущий уровен – 'Жонглиуем коммитами №1'*",
+              "*Перед прохождением этого уровня обязательно надо пройти предыдущий уровень – 'Жонглируем коммитами №1'*",
               "",
-              "В прошлом уровне мы использовали `rebase -i`, чтобы переставлять коммиты. Как только нужный нам коммит оказывался в конце, мы могли спокойно изменить его при помощи --ammend и переставить обратно.",
+              "В прошлом уровне мы использовали `rebase -i`, чтобы переставлять коммиты. Как только нужный нам коммит оказывался в конце, мы могли спокойно изменить его при помощи `--amend` и переставить обратно.",
               "",
-              "Единственная проблема тут - это множеств перестановок, которые могут спровоцировать конфликты. Посмотрим, как с этой же задачей справиться cherry-pick"
+              "Единственная проблема тут - это множество перестановок, которые могут спровоцировать конфликты. Посмотрим, как с этой же задачей справится cherry-pick."
             ]
           }
         },
@@ -440,7 +444,7 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Важно помнить, что cherry-pick поместить любой коммит сразу после HEAD (только, если этот коммит не является предком HEAD)",
+              "Важно помнить, что cherry-pick поместит любой коммит сразу после HEAD (только если этот коммит не является предком HEAD)",
               "",
               "Вот небольшое демо для напоминания:"
             ],
@@ -455,9 +459,52 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Итек, в этом уровне нужно достичь того же эффекта, но без использования `rebase -i`. Остальное – по усмотрению.",
+              "Итак, в этом уровне нужно достичь того же эффекта, но без использования `rebase -i`. Остальное – по усмотрению.",
               "",
               "Важно, чтобы совпадало не только дерево коммитов, но и количество апострофов."
+            ]
+          }
+        }
+      ]
+    },
+    "uk": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Жонглюємо комітами #2",
+              "",
+              "*Якщо ти ще не пройшов Жонглюємо комітами #1 (попередній рівень), будь ласка, зроби це перед тим як продовжити*",
+              "",
+              "Як ти бачив в попередньому рівні, ми використали `rebase -i` щоб впорядкувати набір комітів. Як тільки потрібний коміт опиняється вгорі, його досить легко змінити за допомогою --amend й потім відсортувати коміти в попередньому порядку.",
+              "",
+              "Єдина проблема з таким підходом полягає в тому, що виконується досить багато перестановок комітів, що може призвести до конфліктів при виконанні rebase. Спробуймо інший підхід який використовує `git cherry-pick`"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Не забувай, що git cherry-pick вставить коміт з будь-якого місця в HEAD (якщо це не коміт-предок HEAD).",
+              "",
+              "Ось невелике демо, щоб пригадати:"
+            ],
+            "afterMarkdowns": [
+              "Добре! Продовжуємо"
+            ],
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Отже, в цьому рівні досягнімо тієї ж мети -- модифікації `C2` -- але без використання `rebase -i`. Я думаю, ти розберешся як це зробити! :D",
+              "",
+              "Зверни увагу, що точне число апострофів (') в коміті не важливе, важлива тільки відносна різниця. Наприклад, якщо кожен коміт буде містити додатковий апостроф, я все одно зарахую такий розв’язок."
             ]
           }
         }

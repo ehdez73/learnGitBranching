@@ -1,4 +1,4 @@
-exports.level = {
+﻿exports.level = {
   "goalTreeString": "{\"branches\":{\"master\":{\"target\":\"C2\",\"id\":\"master\",\"remoteTrackingBranchID\":null},\"side\":{\"target\":\"C4\",\"id\":\"side\",\"remoteTrackingBranchID\":null},\"bugFix\":{\"target\":\"C7\",\"id\":\"bugFix\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\"],\"id\":\"C4\"},\"C5\":{\"parents\":[\"C3\"],\"id\":\"C5\"},\"C6\":{\"parents\":[\"C5\"],\"id\":\"C6\"},\"C7\":{\"parents\":[\"C6\"],\"id\":\"C7\"}},\"tags\":{\"v0\":{\"target\":\"C0\",\"id\":\"v0\",\"type\":\"tag\"},\"v1\":{\"target\":\"C3\",\"id\":\"v1\",\"type\":\"tag\"}},\"HEAD\":{\"target\":\"bugFix\",\"id\":\"HEAD\"}}",
   "solutionCommand": "git commit ",
   "startTree": "{\"branches\":{\"master\":{\"target\":\"C2\",\"id\":\"master\",\"remoteTrackingBranchID\":null},\"side\":{\"target\":\"C4\",\"id\":\"side\",\"remoteTrackingBranchID\":null},\"bugFix\":{\"target\":\"C6\",\"id\":\"bugFix\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\"],\"id\":\"C4\"},\"C5\":{\"parents\":[\"C3\"],\"id\":\"C5\"},\"C6\":{\"parents\":[\"C5\"],\"id\":\"C6\"}},\"tags\":{\"v0\":{\"target\":\"C0\",\"id\":\"v0\",\"type\":\"tag\"},\"v1\":{\"target\":\"C3\",\"id\":\"v1\",\"type\":\"tag\"}},\"HEAD\":{\"target\":\"bugFix\",\"id\":\"HEAD\"}}",
@@ -10,8 +10,10 @@ exports.level = {
     "es_AR": "Git Describe",
     "pt_BR": "Git Describe",
     "zh_TW": "git describe",
-    "zh_CN": "git describe",
-    "ru_RU": "Git describe"
+    "zh_CN": "Git Describe",
+    "ru_RU": "Git describe",
+    "ko"   : "Git describe(묘사)",
+    "uk"   : "Git Describe"
   },
   "hint": {
     "en_US": "Just commit once on bugFix when you're ready to move on",
@@ -21,8 +23,10 @@ exports.level = {
     "es_AR": "Simplemente commiteá una vez en bugFix cuando estés listo para seguir",
     "pt_BR": "Simplesmente commite uma vez em bugFix quando quiser parar de experimentar",
     "zh_TW": "當你要移動的時候，只要在 bugFix 上面 commit 就好了",
-    "zh_CN": "当你要移动的时候，只要在 bugFix 上面 commit 就好了",
-    "ru_RU": "Когда закончишь, просто сделай commit"
+    "zh_CN": "当你准备好时，在 bugFix 分支上面提交一次就可以了",
+    "ru_RU": "Когда закончишь, просто сделай commit",
+    "ko"   : "다음으로 넘어가고 싶으면 bugFix를 한번 커밋하면 됩니다.",
+    "uk"   : "Просто зроби один коміт в bugFix коли ти будеш готовий іти далі"
   },
   "startDialog": {
     "en_US": {
@@ -96,9 +100,9 @@ exports.level = {
             "markdowns": [
               "### Git describe",
               "",
-              "Parce ce que les tags sont de très bonne références dans le code, git à une commande pour *décrire* (describe) la différence entre le commit et le tag le plus récent. Cette commande s'appelle `git describe`!",
+              "Parce ce que les tags sont de très bonnes références dans le code, git à une commande pour *décrire* (describe) la différence entre le commit et le tag le plus récent. Cette commande s'appelle `git describe` !",
               "",
-              "Git describe peut vous aider lorsque vous vous êtes beaucoup déplacé ; cela peut arriver après un git bisect (chercher l'apparition d'un bug) ou lorsque vous revenez de vacance après 3 semaines sur l'ordinateur d'un collègue."
+              "Git describe peut vous aider lorsque vous vous êtes beaucoup déplacé ; cela peut arriver après un git bisect (chercher l'apparition d'un bug) ou lorsque vous revenez de vacances après 3 semaines sur l'ordinateur d'un collègue."
             ]
           }
         },
@@ -116,7 +120,7 @@ exports.level = {
               "",
               "`<tag>_<numCommits>_g<hash>`",
               "",
-              "où `tag` est le tag le plus proche dans l'historique, `numCommits` le nombre de commit avec le tag, et `<hash>` le hash/identifiant du commit décrit."
+              "où `tag` est le tag le plus proche dans l'historique, `numCommits` le nombre de commits avec le tag, et `<hash>` le hash/identifiant du commit décrit."
             ]
           }
         },
@@ -124,7 +128,7 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Regardons un petit exemple. Prennons cet arbre :"
+              "Regardons un petit exemple. Prenons cet arbre :"
             ],
             "afterMarkdowns": [
               "La commande`git describe master` donne le résultat :",
@@ -220,11 +224,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "### git describe",
+              "### Git Describe",
               "",
-              "因为 tag 在 commit tree 上表示的是一个锚点，git 有一个指令可以用来*显示*离你最近的锚点（也就是 tag），而且这个指令叫做 `git describe`！",
+              "由于标签在代码库中起着“锚点”的作用，Git 还为此专门设计了一个命令用来**描述**离你最近的锚点（也就是标签），它就是 `git describe`！",
               "",
-              "当你已经完成了一个 `git bisect`（一个找寻有 bug 的 commit 的指令），或者是当你使用的是你跑去度假的同事的电脑时， `git describe` 可以帮助你了解你离最近的 tag 差了多少个 commit。"
+              "Git Describe 能帮你在提交历史中移动了多次以后找到方向；当你用 `git bisect`（一个查找产生 Bug 的提交记录的指令）找到某个提交记录时，或者是当你坐在你那刚刚度假回来的同事的电脑前时， 可能会用到这个命令。"
             ]
           }
         },
@@ -232,17 +236,19 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "`git describe` 的​​使用方式：",
+              "`git describe` 的​​语法是：",
               "",
               "`git describe <ref>`",
               "",
-              "`<ref>` 是任何一个可以被 git 解读成 commit 的位置，如果你没有指定的话，git 会以你目前所在的位置为准（`HEAD`）。",
+              "`<ref>` 可以是任何能被 Git 识别成提交记录的引用，如果你没有指定的话，Git 会以你目前所检出的位置（`HEAD`）。",
               "",
-              "指令的输出就像这样：",
+              "它输出的结果是这样的：",
               "",
               "`<tag>_<numCommits>_g<hash>`",
               "",
-              "`<tag>` 表示的是离 `<ref>` 最近的 tag， `numCommits` 是表示这个 tag 离 `<ref>` 有多少个 commit， `<hash>` 表示的是你所给定的 `<ref>` 所表示的commit 的前七个id。"
+              "`tag` 表示的是离 `ref` 最近的标签， `numCommits` 是表示这个 `ref` 与 `tag` 相差有多少个提交记录， `hash` 表示的是你所给定的 `ref` 所表示的提交记录哈希值的前几位。",
+              "",
+              "当 `ref` 提交记录上有某个标签时，则只输出标签名称"
             ]
           }
         },
@@ -250,7 +256,7 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "让我们来看一个例子，对于下面的 tree："
+              "让我们来看一个例子，对于下面的提交树："
             ],
             "afterMarkdowns": [
               "`git describe master` 会输出：",
@@ -269,9 +275,9 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "`git describe` 就是这样了！试着在这个关卡指定几个位置来感受一下这个指令吧！",
+              "`git describe` 就是这样了！试着在这个关卡指定几个位置来感受一下这个命令吧！",
               "",
-              "当你完成的时候，只要一个 commit 就可以结束这个关卡，我们会给你一个免费赠品:P"
+              "当你准备进行下一关时，只要提交一次就可以通过这个关卡。算是我们送你的一个小礼物吧 :P"
             ]
           }
         }
@@ -537,9 +543,9 @@ exports.level = {
             "markdowns": [
               "### Git Describe",
               "",
-              "Теги являются прекрасными ориентирами в истории изменений, поэтому в git есть команда, которая показывает как далеко текущее состоянии от ближайшего тега. И эта команда называется `git describe`",
+              "Теги являются прекрасными ориентирами в истории изменений, поэтому в git есть команда, которая показывает, как далеко текущее состоянии от ближайшего тега. И эта команда называется `git describe`",
               "",
-              "Git describe помогает сориентироваться, после отката на много коммитов по истории изменений. Такое может случиться, когда вы сделали git bisect или если вы недавно вернулись из отпуска =)"
+              "Git describe помогает сориентироваться после отката на много коммитов по истории изменений. Такое может случиться, когда вы сделали `git bisect` или если вы недавно вернулись из отпуска =)"
             ]
           }
         },
@@ -547,11 +553,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Git describe выглядить примерно так:",
+              "Git describe выглядит примерно так:",
               "",
               "`git describe <ref>`",
               "",
-              "Где `ref` это что-либо, что указывает на конкретный коммит. Если не указать `ref`, то git будет считать, что указано текущее положение (`HEAD`).",
+              "Где `ref` — это что-либо, что указывает на конкретный коммит. Если не указать `ref`, то git будет считать, что указано текущее положение (`HEAD`).",
               "",
               "Вывод команды выглядит примерно так:",
               "",
@@ -572,7 +578,6 @@ exports.level = {
               "",
               "`v1_2_gC2`",
               "",
-              "Whereas `git describe side` would output:",
               "Тогда как `git describe side` выведет:",
               "",
               "`v2_1_gC4`"
@@ -585,9 +590,135 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Это, в общем-то всё, что можно сказать про git describe. Попробуй выполнить команду на нескольких коммитах.",
+              "Это, в общем-то, всё, что можно сказать про `git describe`. Попробуй выполнить команду на нескольких коммитах.",
               "",
-              "Как только наиграешься, просто сделай один коммит и уровень будет пройден."
+              "Как только наиграешься, просто сделай один коммит, и уровень будет пройден."
+            ]
+          }
+        }
+      ]
+    },
+	"ko": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Git Describe",
+              "",
+              "커밋 트리에서 태그가 훌륭한 \"닻\"역할을 하기 때문에, git에는 여러분이 가장 가까운 \"닻(태그)\"에 비해 상대적으로 어디에 위치해있는지 *describe(묘사)*해주는 명령어가 있습니다. 이 명령어는 `git describe` 입니다!",
+              "",
+              "Git describe는 커밋 히스토리에서 앞 뒤로 여러 커밋을 이동하고 나서 커밋 트리에서 방향감각을 다시 찾는데 도움을 줍니다; 이런 상황은 git bisect(문제가 되는 커밋을 찾는 명령어라고 간단히 생각하자)를 하고 나서라던가 휴가를 다녀온 동료의 컴퓨터에 앉는경우가 있습니다."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Git describe 는 다음의 형태를 가지고 있습니다:",
+              "",
+              "`git describe <ref>`",
+              "",
+              "`<ref>`에는 commit을 의미하는 그 어떤것이던 쓸 수 있습니다. 만약 ref를 특정 지어주지 않으면, git은 그냥 지금 체크아웃된곳을 사용합니다 (`HEAD`).",
+              "",
+              "명령어의 출력은 다음과 같은 형태로 나타납니다:",
+              "",
+              "`<tag>_<numCommits>_g<hash>`",
+              "",
+              "`tag`는 가장 가까운 부모 태그를 나타냅니다. `numCommits`은 그 태그가 몇 커밋 멀리있는지를 나타냅니다. `<hash>`는 묘사하고있는 커밋의 해시를 나타냅니다."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "간단한 예제를 확인해 봅시다. 아래의 트리에서:"
+            ],
+            "afterMarkdowns": [
+              "`git describe master` 명령은 다음을 출력합니다:",
+              "",
+              "`v1_2_gC2`",
+              "",
+              "`git describe side`는 다음을 출력합니다:",
+              "",
+              "`v2_1_gC4`"
+            ],
+            "command": "git tag v2 C3",
+            "beforeCommand": "git commit; go -b side HEAD~1; gc; gc; git tag v1 C0"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "이정도면 git describe를 충분히 활용할 수 있습니다! 이 레벨의 몇 지점을 describe 명령어를 통해 확인해보면서 느낌을 익혀 봅시다.",
+              "",
+              "준비가 되면 커밋을 한번해서 레벨을 종료하세요. 자유롭게 연습해보세요 :P"
+            ]
+          }
+        }
+      ]
+    },
+    "uk": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Git Describe",
+              "",
+              "Через те, що таги є такими чудовими \"орієнтирами\" по коду, git також має команду *описати* (describe) де ти є відносно найближчого \"орієнтира\" (тобто тага). І ця команда називається `git describe`!",
+              "",
+              "Git describe допоможе тобі знайти себе після того як ти перестрибнеш на кілька комітів по історії вперед чи назад; це може статися після того як ти закінчив git bisect (пошук-дебаггер) чи коли тебе попросили підійти до колеги, котрий щойно прийшов з відпустки."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Git describe має наступну форму:",
+              "",
+              "`git describe <посилання>`",
+              "",
+              "Де `<посилання>` -- це будь-що, що вказує на конкретний коміт. Якщо ти не вкажеш посилання, git використає поточну локацію (`HEAD`).",
+              "",
+              "Вивід команди виглядає як:",
+              "",
+              "`<таг>_<к-ть комітів>_g<хеш>`",
+              "",
+              "де `таг` -- це найближчий попередній таг з історії; `к-ть комітів` -- це наскільки далеко цей таг в історії, а `<хеш>` -- це хеш коміту, який описується."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Розгляньмо короткий приклад. Для дерева нижче:"
+            ],
+            "afterMarkdowns": [
+              "Команда `git describe master` виведе:",
+              "",
+              "`v1_2_gC2`",
+              "",
+              "коли `git describe side` виведе:",
+              "",
+              "`v2_1_gC4`"
+            ],
+            "command": "git tag v2 C3",
+            "beforeCommand": "git commit; go -b side HEAD~1; gc; gc; git tag v1 C0"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Ось і все що ти маєш знати про git describe. Спробуй виконати describe для різних місць в дереві комітів щоб набити руку.",
+              "",
+              "Як будеш готовий, просто закоміть щось щоб закінчити цей рівень. Трохи шари :P"
             ]
           }
         }

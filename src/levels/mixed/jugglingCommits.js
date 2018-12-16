@@ -25,9 +25,10 @@ exports.level = {
     "es_AR": "Haciendo malabares con los commits",
     "pt_BR": "Malabarismo com commits",
     "ja": "コミットをやりくりする",
-    "zh_CN": "提交变换戏法",
+    "zh_CN": "提交的技巧 #1",
     "zh_TW": "commit 的戲法",
-    "ru_RU": "Жонглируем коммитами"
+    "ru_RU": "Жонглируем коммитами",
+    "uk": "Жонглюємо комітами"
   },
   "hint": {
     "en_US": "The first command is git rebase -i HEAD~2",
@@ -37,9 +38,10 @@ exports.level = {
     "pt_BR": "O primeiro comando é git rebase -i HEAD~2",
     "ja": "最初に打つコマンドはgit rebase -i HEAD~2",
     "ko": "첫번째 명령은 git rebase -i HEAD~2 입니다",
-    "zh_CN": "第一个命令是 'git rebase -i HEAD~2'",
+    "zh_CN": "第一个命令是 `git rebase -i HEAD~2`",
     "zh_TW": "第一個命令是 'git rebase -i HEAD~2'",
-    "ru_RU": "Первой командой должна быть git rebase -i HEAD~2"
+    "ru_RU": "Первой командой должна быть git rebase -i HEAD~2",
+    "uk": "Перша команда має бути git rebase -i HEAD~2"
   },
   "startDialog": {
     "en_US": {
@@ -84,9 +86,9 @@ exports.level = {
             "markdowns": [
               "## Jongler avec les Commits",
               "",
-              "Voici une autre situation fréquente. Vous avez certains changements (`newImage`) et un autre groupe de changements (`caption`) qui sont relié, ils sont donc empilés l'un sur l'autre dans votre dépôt Git (i.e. un après l'autre).",
+              "Voici une autre situation fréquente. Vous avez certains changements (`newImage`) et un autre groupe de changements (`caption`) qui sont reliés, ils sont donc empilés l'un sur l'autre dans votre dépôt Git (i.e. un après l'autre).",
               "",
-              "Là ou ça se complique c'est lorsque vous devez faire une petite modification dans un commit antérieur. Dans ce cas, les configuration de  `newImage` devront changer un peu, même si ce commit est loin dans notre historique !!"
+              "Là où ça se complique c'est lorsque vous devez faire une petite modification dans un commit antérieur. Dans ce cas, les configurations de  `newImage` devront changer un peu, même si ce commit est loin dans notre historique !!"
             ]
           }
         },
@@ -103,9 +105,9 @@ exports.level = {
               "",
               "Il y a plusieurs façons d'atteindre ce but (cherry-pick semble très tentant), mais nous allons parler de cherry-pick plus tard, pour le moment concentrez-vous sur cette technique.",
               "",
-              "Pour terminer, Faites attentions au but -- Du au fait que nous déplacons les commmits 2 fois, ils se retrouvent les deux avec une apostrophe. une deuxième apostrophe est ajouté sur le commit que nous modifions, ce qui nous donnes l'arbre finale ",
+              "Pour terminer, Faites attention au but -- Dû au fait que nous déplaçons les commits 2 fois, ils se retrouvent les deux avec une apostrophe. Une deuxième apostrophe est ajouté sur le commit que nous modifions, ce qui nous donne l'arbre finale ",
               "",
-              "Ceci étant dit, Je peux comparer le résultat avec la stuctures et les différentes apostophes. Tant que votre arbre master a la même structure et apostrophe le niveau sera considéré réussi."
+              "Ceci étant dit, je peux comparer le résultat avec la stucture et les différentes apostophes. Tant que votre arbre master a la même structure et apostrophe le niveau sera considéré réussi."
             ]
           }
         },
@@ -189,7 +191,7 @@ exports.level = {
             "markdowns": [
               "## Jonglieren mit Commits",
               "",
-              "Eine weitere häufig vorkommende Situation: du hast einige Änderungen in `newImage` und weitere Änderungen in `caption`. Die Änderungen hängen voneineander ab, das heißt in diesem Fall `caption` ist ein Nachfolger von `newImage`.",
+              "Eine weitere häufig vorkommende Situation: du hast einige Änderungen in `newImage` und weitere Änderungen in `caption`. Die Änderungen hängen voneinander ab, das heißt in diesem Fall `caption` ist ein Nachfolger von `newImage`.",
               "",
               "Nun kann es vorkommen, dass du einen früheren Commit verändern willst. In unserem Fall will die Design-Abteilung, dass die Abmessungen in `newImage` leicht verändert werden, obwohl das mitten in unserer History liegt!"
             ]
@@ -210,7 +212,7 @@ exports.level = {
               "",
               "Beachte den geschilderten Zielzustand. Da wir die Commits zweimal umsortieren bekommen sie jedesmal ein Apostroph hinzugefügt (weil sie jedesmal kopiert werden). Ein weiteres Apostroph entsteht durch den `commit --amend`.",
               "",
-              "Zuguterletzt noch eine Bemerkung: ich kann Level nun auf Struktur und Apostroph-Differenz prüfen. So lange wie dein `master` am Ende dieselbe Strukutr und Apostroph-Differenz aufweist wie der Ziel-`master`, ist der Level bestanden."
+              "Zuguterletzt noch eine Bemerkung: ich kann Level nur auf Struktur und Apostroph-Differenz prüfen. So lange wie dein `master` am Ende dieselbe Struktur und Apostroph-Differenz aufweist wie der Ziel-`master`, ist der Level bestanden."
             ]
           }
         },
@@ -255,11 +257,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## 提交变换戏法",
+              "## 提交的技巧 #1",
               "",
-              "下面这种情况也是经常出现的。例如你之前已经在 `newImage` 分支上做了一些提交，然后又在 `caption` 分支上做了一些相关的提交，因此它们看起来是一个连一个的（stacked on top of each other in your repository）。",
+              "接下来这种情况也是很常见的：你之前在 `newImage` 分支上进行了一次提交，然后又基于它创建了 `caption` 分支，然后又提交了一次。",
               "",
-              "有点棘手的就是有时候你又想往先前的提交里做些小改动。呐，现在就是设计师想要我们去轻微改变下 `newImage` 的内容（change the dimensions slightly），尽管那个提交是很久很久以前的了。"
+              "此时你想对的某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 `newImage` 中图片的分辨率，尽管那个提交记录并不是最新的了。"
             ]
           }
         },
@@ -267,19 +269,20 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "为了实现他的愿望，我们可以按照下面的方法来做：",
+              "我们可以通过下面的方法来克服困难：",
               "",
-              "* 先用 `git rebase -i` 将提交重新排序，然后把我们想要修改的提交挪到最前",
+              "* 先用 `git rebase -i` 将提交重新排序，然后把我们想要修改的提交记录挪到最前",
               "* 然后用 `commit --amend` 来进行一些小修改",
-              "* 接着再用 `git rebase -i` 来将他们按最开始的顺序重新排好",
+              "* 接着再用 `git rebase -i` 来将他们调回原来的顺序",
               "* 最后我们把 master 移到修改的最前端（用你自己喜欢的方法），就大功告成啦！",
               "",
-              "当然还有许多方法可以完成这个任务（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。",
+              "当然完成这个任务的方法不止上面提到的一种（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。",
+              "最后有必要说明一下目标状态中的那几个`'` —— 我们把这个提交移动了两次，每移动一次会产生一个 `'`；而 C2 上多出来的那个是我们在使用了 amend 参数提交时产生的，所以最终结果就是这样了。",
               "",
-              "啊最后还要提醒你一下最终的形式 —— 因为我们把这个提交移动了两次，所以会分别产生一个省略提交（both get an apostrophe appended）。还有一个省略提交是因为我们为了实现最终效果去修改提交而添加的。"
+              "也就是说，我在对比结果的时候只会对比提交树的结构，对于 `'` 的数量上的不同，并不纳入对比范围内。只要你的 `master` 分支结构与目标结构相同，我就算你通过。"
             ]
           }
-        },
+        }
       ]
     },
     "zh_TW": {
@@ -356,7 +359,7 @@ exports.level = {
             "markdowns": [
               "## Жонглируем коммитами",
               "",
-              "Вот ещё одна ситуация, которая часто случается. Есть некоторые изменения (`newImage`) и другие изменения (`caption`), которые связаны, так что находятся друг подверх друга в репозитории.",
+              "Вот ещё одна ситуация, которая часто случается. Есть некоторые изменения (`newImage`) и другие изменения (`caption`), которые связаны так, что находятся друг поверх друга в репозитории.",
               "",
               "Штука в том, что иногда нужно внести небольшие изменения в более ранний коммит. В таком случае надо немного поменять `newImage`, несмотря на то, что коммит уже в прошлом!"
             ]
@@ -371,16 +374,50 @@ exports.level = {
               "* Переставить коммит так, чтобы нужный находился наверху при помощи `git rebase -i`",
               "* Внести изменения при помощи `commit --amend`",
               "* Переставить всё обратно при помощи `git rebase -i`",
-              "* И наконец, переместить master на изменённуй часть дерева, чтобы закончить уровень.",
+              "* И наконец, переместить master на изменённую часть дерева, чтобы закончить уровень.",
               "",
-              "Этот уровень можно закончить несколькими способами, но в этом уровне нужно сосредоточиться на вышеописанном методе.",
+              "Это задание можно выполнить несколькими способами (и, гляжу, ты посматриваешь на cherry-picking), но сейчас сосредоточься на вышеописанном методе.",
               "",
-              "Обрати внимание на итоговое состояние в этом уровне – так как мы дважды перемещаем коммиты, они каждый получать по апострофу. Ещё один апостроф добавляется, когда мы делаем commit --amend.",
+              "Обрати внимание на итоговое состояние в этом уровне – так как мы дважды перемещаем коммиты, оба они получат по апострофу. Ещё один апостроф добавляется, когда мы делаем `commit --amend`.",
               "",
               "Важно, чтобы совпадало не только дерево коммитов, но и количество апострофов."
             ]
           }
         },
+      ]
+    },
+    "uk": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Жонглюємо комітами",
+              "",
+              "Ось інша ситуація, що доволі часто трапляється. В тебе є якісь зміни (`newImage`) та ще якийсь набір комітів (`caption`), які зв’язані між собою, тому вони знаходяться один над одним в твоєму репозиторії (або один за одним).",
+              "",
+              "Штука в тому що іноді потрібно зробити невелику модифікацію до попереднього коміту. В цьому випадку, дизайнери хочуть щоб ми трохи змінили розміри `newImage`, не зважаючи на те, що цей коміт знаходиться досить глибоко в історії!!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Ми поборимо цю складність наступним чином:",
+              "",
+              "* Ми відсортуємо коміти таким чином, щоб той, який ми хочемо змінити, був останнім за допомогою `git rebase -i`",
+              "* Ми виконаємо `commit --amend` щоб внести невелику правку до останнього коміту",
+              "* Тоді ми відсортуємо коміти в попередньому порядку, за допомогою `git rebase -i`",
+              "* І на останок, ми пересунемо master на змінену частину дерева щоб закінчити цей рівень(ти можеш вибрати метод)",
+              "",
+              "Насправді є кілька способів як виконати поставлену задачу (Я бачу, ти поглядаєш на cherry-pick), і ми розберемося з ними всіма трохи пізніше, але зараз скористаймося саме цим методом.",
+              "Зверни увагу на фінальний стан в цьому рівні -- позаяк ми перемістили коміти двічі, кожен з них отримає по апострофу. Ще один апостроф додасться коли ми виконаємо commit --amend.",
+              "",
+              "Враховуючи сказане вище, я буду порівнювати дерево як за назвою коміта, так і за кількістю апострофів. Щойно дерево цілей та master співпадуть, ти пройдеш цей рівень."
+            ]
+          }
+        }
       ]
     }
   }

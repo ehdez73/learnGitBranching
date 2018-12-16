@@ -14,9 +14,11 @@ exports.dialog = {
         'beginner, just go ahead and start with the first. If you already know some Git basics, ',
         'try some of our later more challenging levels.',
         '',
+        'You can see all the commands available with `show commands` at the terminal.',
+        '',
         'PS: Want to go straight to a sandbox next time?',
         'Try out ',
-        '[this special link](http://pcottle.github.io/learnGitBranching/?NODEMO)'
+        '[this special link](https://pcottle.github.io/learnGitBranching/?NODEMO)'
       ]
     }
   }],
@@ -35,11 +37,11 @@ exports.dialog = {
         '',
         'Si no viste la demo, mirala en esta dirección:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         '¿Harto de este mensaje? Agregale `?NODEMO` a la URL para dejar de verlo, como en este link:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
       ]
     }
   }, {
@@ -91,11 +93,11 @@ exports.dialog = {
         '',
         'Se você ainda não viu o demo, veja aqui:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         'Farto desta mensagem? Acrescente `?NODEMO` ao endereço para se livrar dela, como no link abaixo:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
       ]
     }
   }, {
@@ -144,11 +146,11 @@ exports.dialog = {
         '',
         'Falls du die Demonstration noch nicht gesehen hast, schau sie dir hier an:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         'Genervt von diesem Fenster? Häng `?NODEMO` an die URL um es los zu werden, so wie hier:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
       ]
     }
   }, {
@@ -200,11 +202,11 @@ exports.dialog = {
         '',
         '簡単なデモを用意してあるので、もしよければこちらもご覧ください：',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo&locale=ja)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo&locale=ja)',
         '',
         'このダイアログ自体を省略するには、以下のようにURLの末尾にクエリストリング`?NODEMO`を付加してアクセスしてください。',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](http://pcottle.github.io/learnGitBranching/?NODEMO&locale=ja)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](https://pcottle.github.io/learnGitBranching/?NODEMO&locale=ja)'
       ]
     }
   }, {
@@ -241,7 +243,7 @@ exports.dialog = {
         '',
         'それでは教材の選択画面に進んでみることにします。',
         '',
-        '（なお、日本語版製作者のフォークサイトは[こちら](http://remore.github.io/learnGitBranching-ja/)になります。）'
+        '（なお、日本語版製作者のフォークサイトは[こちら](https://remore.github.io/learnGitBranching-ja/)になります。）'
       ]
     }
   }],
@@ -249,51 +251,20 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## 欢迎光临 Learn Git Branching!',
+        '## 欢迎光临 Learn Git Branching',
         '',
-        '本应用旨在帮助初学者领会 git 分支背后的强大概念。',
-        '希望你能喜欢这个应用，并学到知识！',
+        '你对 Git 感兴趣吗？那么算是来对地方了！',
+        '“Learning Git Branching” 可以说是目前为止最好的教程了，在沙盒里你能执行相应的命令，还能看到每个命令的执行情况；',
+        '通过一系列刺激的关卡挑战，逐步深入的学习 Git 的强大功能，在这个过程中你可能还会发现一些有意思的事情。',
         '',
-        '# 演示!',
+        '关闭这个对话框以后，你会看到我们提供的许多关卡。如果你是初学者，从第一关开始逐个向后挑战就是了。',
+        '而如果你已经入门了，可以略过前面，直接挑战后面更有难度的关卡。',
         '',
-        '如果你还没看过演示，请到此查看：',
+        '### 演示',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '如果你还没看过演示，请[到此](?demo)查看。',
         '',
-        '厌烦这个对话框？ 在 URL 后头加上 `?NODEMO` 就看不到它了，也可以直接点下边这个链接：',
-        '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](http://pcottle.github.io/learnGitBranching/?NODEMO)'
-      ]
-    }
-  }, {
-    type: 'ModalAlert',
-    options: {
-      markdowns: [
-        '## Git 命令',
-        '',
-        '在沙盒模式里，你有好多命令可用。 包括：',
-        '',
-        ' * commit',
-        ' * branch',
-        ' * checkout',
-        ' * cherry-pick',
-        ' * reset',
-        ' * revert',
-        ' * rebase',
-        ' * merge'
-      ]
-    }
-  }, {
-    type: 'ModalAlert',
-    options: {
-      markdowns: [
-        '## 分享即关怀',
-        '',
-        '使用 `export tree` 和 `import tree` 与朋友分享 Git 树',
-        '',
-        '有个好课程可以分享？试试用 `build level` 创建一个关卡，或者 `import level` 试试朋友的。',
-        '',
-        '言归正传，让我们先从 `levels` 开始……'
+        'PS：想直接进入沙盒？ 在 URL 后头加上 `?NODEMO` 就可以了，试一下[这个链接](?NODEMO)：'
       ]
     }
   }],
@@ -310,11 +281,11 @@ exports.dialog = {
         '',
         '如果你還沒看過演示，請到此查看：',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         '厭煩這個對話視窗嗎？在 URL 後頭加上 `?NODEMO` 就看不到它了，也可以直接點下邊這個連結：',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](http://pcottle.github.io/learnGitBranching/?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](https://pcottle.github.io/learnGitBranching/?NODEMO)'
       ]
     }
   }, {
@@ -359,10 +330,10 @@ exports.dialog = {
         '탄탄히 잡게끔 도와드리기 위해 만들었습니다. 재밌게 사용해주시기를',
         '바라며, 무언가를 배워가신다면 더 기쁘겠습니다!',
         '',
-        '이 애플리케이션은 [Peter Cottle](https://github.io/pcottle)님의 [LearnGitBranching](http://pcottle.github.io/learnGitBranching/)를 번역한 것입니다.',
+        '이 애플리케이션은 [Peter Cottle](https://github.io/pcottle)님의 [LearnGitBranching](https://pcottle.github.io/learnGitBranching/)를 번역한 것입니다.',
         '아래 데모를 먼저 보셔도 좋습니다.',
         '',
-        '<http://pcottle.github.io/learnGitBranching/?demo&locale=ko>'
+        '<https://pcottle.github.io/learnGitBranching/?demo&locale=ko>'
       ]
     }
   }, {
@@ -401,7 +372,7 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Bienvenue sur Learn Git Branching!',
+        '## Bienvenue sur Learn Git Branching !',
         '',
         'Cette application a été conçue pour aider les débutants à saisir ',
         'les puissants concepts derrière les branches en travaillant ',
@@ -412,11 +383,11 @@ exports.dialog = {
         '',
         'Si vous n\'avez pas vu la démo, vous pouvez le faire là :',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         'Agacé par ce dialogue ? Ajoutez `?NODEMO` à l\'URL pour le supprimer, en lien ci-dessous pour votre commodité :',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
       ]
     }
   }, {
@@ -425,7 +396,7 @@ exports.dialog = {
       markdowns: [
         '## Commandes Git',
         '',
-        'Il existe une large variété de commandes git disponibles dans le mode bac à sable. Sont inclues',
+        'Il existe une large variété de commandes git disponibles dans le mode bac à sable. Sont inclues :',
         '',
         ' * commit',
         ' * branch',
@@ -441,9 +412,9 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Partager, c\'est se soucier!',
+        '## Partager, c\'est se soucier !',
         '',
-        'Partagez des arbres avec vous amis via `export tree` et `import tree`',
+        'Partagez des arbres avec vos amis via `export tree` et `import tree`',
         '',
         'Vous avez une grande leçon à partager ? Essayez de construire un niveau avec `build level` ou essayez le niveau d\'un ami avec `import level`',
         '',
@@ -468,11 +439,11 @@ exports.dialog = {
         '',
         'Если ты не видел демонстрацию – посмотри её тут:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?demo](http://pcottle.github.io/learnGitBranching/?demo)',
+        '[https://pcottle.github.io/learnGitBranching/?demo](https://pcottle.github.io/learnGitBranching/?demo)',
         '',
         'Достало это сообщение? Добавь `?NODEMO` к адресу и навсегда забудь о нём, ниже ссылка для удобства:',
         '',
-        '[http://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
+        '[https://pcottle.github.io/learnGitBranching/?NODEMO](?NODEMO)'
       ]
     }
   }, {
@@ -506,6 +477,28 @@ exports.dialog = {
         'Команда `show commands` покажет все доступные инструкции. Там есть очень полезные, например `undo` и `reset`',
         '',
         'А пока просто начни игру при помощи `levels`...'
+      ]
+    }
+  }],
+  'uk': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Ласкаво просимо до Learn Git Branching',
+        '',
+        'Хочеш вивчити Git? Тоді ти знайшов те, що шукав!',
+        '"Learn Git Branching" \u2014 це найбільш візуальний та інтерактивний спосіб вивчення Git в Інтернеті. ',
+        'Ти зможеш проходити захопливі рівні, дивитися ',
+        'покрокові інструкції з використання потужних функцій Git, навіть трохи ',
+        'розважитись в процесі навчання.',
+        '',
+        'Після цього діалогу побачиш список доступних рівнів. Якщо ти новачок, ',
+        'просто почни з першого рівня. Якщо вже знаєш основи Git, ',
+        'спробуй більш складні рівні в кінці.',
+        '',
+        'P.S. Хочеш перейти одразу до пісочниці наступного разу?',
+        'Спробуй ',
+        '[це спеціальне посилання.](https://pcottle.github.io/learnGitBranching/?NODEMO)'
       ]
     }
   }]

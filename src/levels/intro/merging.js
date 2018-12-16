@@ -9,9 +9,10 @@ exports.level = {
     "fr_FR": "Faire des 'merge' (fusions de branches) avec Git",
     "ko": "Git에서 브랜치 합치기(Merge)",
     "ja"　　　: "ブランチとマージ",
-    "zh_CN": "分支与合并",
+    "zh_CN": "Git Merge",
     "zh_TW": "git 中的 merge",
-    "ru_RU": "Слияния веток в Git"
+    "ru_RU": "Слияния веток в Git",
+    "uk": "Злиття гілок в Git"
   },
   "hint": {
     "en_US": "Remember to commit in the order specified (bugFix before master)",
@@ -20,10 +21,11 @@ exports.level = {
     "es_AR": "Acordate de commitear en el orden especificado (bugFix antes de master)",
     "pt_BR": "Lembre-se de commitar na ordem especificada (bugFix antes de master)",
     "fr_FR": "Pensez à faire des commits dans l'ordre indiqué (bugFix avant master)",
-    "zh_CN": "记住按指定的顺序提交（bugFix先于master）",
+    "zh_CN": "要按目标窗口中指定的顺序进行提交（bugFix 先于 master）",
     "zh_TW": "記住按指定的順序 commit（bugFix 比 master 優先）",
     "ko": "말씀드린 순서대로 커밋해주세요 (bugFix에 먼저 커밋하고 master에 커밋)",
-    "ru_RU": "Не забудь делать коммиты в правильном порядке (сначала bugFix, потом master)"
+    "ru_RU": "Не забудь делать коммиты в правильном порядке (сначала bugFix, потом master)",
+    "uk": "Не забудь робити коміти в правильному порядку (спочатку bugFix, а вже потім master)"
   },
   "disabledMap": {
     "git revert": true
@@ -106,7 +108,7 @@ exports.level = {
             "markdowns": [
               "## Branches und Mergen",
               "",
-              "Super! Wir wissen jetzt, wie man committet und einen Branch anlegt. Jetzt müssen wir nur noch rauskriegen, wie man die Arbeit, die in verschiedenen Branches steckt, zusammenführen kann. Dann können wir einen neuen Branch erstellen, darin ein neues Feature entwickeln, und das dann in den ursprünglichen Zweig integrieren.",
+              "Super! Wir wissen jetzt, wie man committet und einen Branch anlegt. Jetzt müssen wir nur noch rauskriegen, wie man die Arbeit, die in verschiedenen Branches steckt, zusammenführen kann. Dann können wir einen neuen Branch erstellen, darin ein neues Feature entwickeln, und das dann in den ursprünglichen Branch integrieren.",
               "",
               "Die einfachste Methode, mit der man Branches zusammenführen kann, ist `git merge`. Das Mergen erzeugt in git einen speziellen Commit, der zwei Vorgänger hat. Ein solcher Commit bedeutet im Prinzip \"ich möchte alle Arbeit von dem Vorgänger hier und dem dort *und* allen ihren jeweiligen Vorgängern miteinander kombinieren\".",
               "",
@@ -449,13 +451,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Branches and Merging",
+              "## 分支与合并",
               "",
-              "Great! 我们已经知道怎么提交和使用分支了。接下来要学的一招是如何合并两个不同分支的工作。这让我们可以新建一个分支，在其上开发新功能，然后合并回主线。",
+              "太好了! 我们已经知道如何提交以及如何使用分支了。接下来咱们看看如何将两个分支合并到一起。就是说我们新建一个分支，在其上开发某个新功能，开发完成后再合并回主线。",
               "",
-              "`git merge`是我们要学习的合并工作的第一个方法。合并产生一个特殊的提交记录，它包含两个唯一父提交。有两个父提交的提交记录本质上是：“我想把这两个父提交本身及它们的父提交集合都包含进来。”",
+              "咱们先来看一下第一种方法 —— `git merge`。在 Git 中合并两个分支时会产生一个特殊的提交记录，它有两个父节点。翻译成自然语言相当于：“我要把这两个父节点本身及它们所有的祖先都包含进来。”",
               "",
-              "有图有真相，看看下面的图示就明白了。"
+              "通过图示更容易理解一些，咱们到下一页看一下。"
             ]
           }
         },
@@ -463,17 +465,17 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "当前有两个分支：各有一个唯一的提交。这意味着没有一个分支包含我们对代码库的所有修改。让我们合并这两个分支来解决这个问题。",
+              "我们准备了两个分支，每个分支上各有一个独有的提交。这意味着没有一个分支包含了我们修改的所有内容。咱们通过合并这两个分支来解决这个问题。",
               "",
-              "我们要把 `bugFix` 合并到 `master` "
+              "我们要把 `bugFix` 合并到 `master` 里"
             ],
             "command": "git merge bugFix",
             "afterMarkdowns": [
-              "哇！看见木有？首先，`master` 现在指向一个拥有两个父提交的提交记录。假如从 `master` 开始沿着箭头向上游走，在到达起点的路上会经过所有的提交记录。这说明有 `master` 包含了对代码库的所有修改。",
+              "哇哦！看见了吗？首先，`master` 现在指向了一个拥有两个父节点的提交记录。假如从 `master` 开始沿着箭头向上看，在到达起点的路上会经过所有的提交记录。这意味着 `master` 包含了对代码库的所有修改。↓↓↓",
               "",
-              "还有，看见各个提交记录的颜色变化了吗？为了帮助学习，我使用了颜色混合。每个分支都有特定的颜色。每个提交记录都变成了含有此提交的所有分支的混合色。",
+              "还有，看见各个提交记录的颜色变化了吗？为了帮助学习理解，我引入了颜色搭配。每个分支都有不同的颜色，而每个提交记录的颜色是所有包含该提交记录的分支的颜色混合之后的颜色。",
               "",
-              "所以，`master` 分支的颜色被混入到所有的提交记录，但 `bugFix` 没有。接下来就改一下这里吧。"
+              "所以，`master` 分支的颜色被混入到所有的提交记录，但 `bugFix` 没有。下面咱们让它也改变一下颜色。"
             ],
             "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
           }
@@ -482,13 +484,13 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "让我们把 `master` 分支合并到 `bugFix` 吧。"
+              "咱们再把 `master` 分支合并到 `bugFix`："
             ],
             "command": "git checkout bugFix; git merge master",
             "afterMarkdowns": [
-              "因为 `bugFix` 分支在 `master` 分支的下游，git什么都不用做，只是简单地把`bugfix`分支移动到`master`指向的提交记录。",
+              "因为 `master` 继承自 `bugFix`，Git 什么都不用做，只是简单地把 `bugFix` 移动到 `master` 所指向的那个提交记录。",
               "",
-              "现在所有的提交记录的颜色都是一样的啦，这表明每一个分支都包含了代码库的所有修改！走起！"
+              "现在所有提交记录的颜色都一样了，这表明每一个分支都包含了代码库的所有修改！大功告成！"
             ],
             "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit; git merge bugFix"
           }
@@ -497,16 +499,16 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "想完成此关，执行以下操作：",
+              "要想通过这一关，需要以下几步：",
               "",
-              "* 创建新分支 `bugFix` ",
-              "* 用 `git checkout bugFix` 切换到 `bugFix`分支",
+              "* 创建新分支 `bugFix`",
+              "* 用 `git checkout bugFix` 命令切换到该分支",
               "* 提交一次",
-              "* 用 `git checkout` 切换回 `master` ",
+              "* 用 `git checkout master` 切换回 `master`",
               "* 再提交一次",
-              "* 用 `git merge` 合并 `bugFix`分支进 `master`",
+              "* 用 `git merge` 把 `bugFix` 合并到 `master`",
               "",
-              "*记住，总是可以用 \"objective\" 命令来重新显示这个对话框！*"
+              "* 你随时都可以用“objective”命令来打开这个对话框！*"
             ]
           }
         }
@@ -658,9 +660,9 @@ exports.level = {
             "markdowns": [
               "## Ветки и слияния",
               "",
-              "Ок! Теперь мы знаем как создавать ветки и коммитить наши изменения. Теперь надо понять как объединять изменения из двух разных веток. Очень удобно создать ветку, сделать свою часть работы в ней и потом объединить изменения из своей ветки с общими.",
+              "Ок! Мы уже знаем, как создавать ветки и коммитить наши изменения. Теперь надо понять, как объединять изменения из двух разных веток. Очень удобно создать ветку, сделать свою часть работы в ней и потом объединить изменения из своей ветки с общими.",
               "",
-              "Первый способ объединения изменений, который мы рассмотрим - это `git merge` - слияние или просто мердж. Слияния в Git создают особый вид коммита, который имеет сразу двух родителей. Коммит с двумя родителями обычно означает, что мы хотим объединить изменения из одного коммита, с другим коммитом и всеми их родителскими коммитами.",
+              "Первый способ объединения изменений, который мы рассмотрим - это `git merge` - слияние или просто мердж. Слияния в Git создают особый вид коммита, который имеет сразу двух родителей. Коммит с двумя родителями обычно означает, что мы хотим объединить изменения из одного коммита с другим коммитом и всеми их родительскими коммитами.",
               "",
               "Слишком запутанно =) На схеме всё проще и понятнее."
             ]
@@ -675,11 +677,11 @@ exports.level = {
               "Мы сделаем `merge` ветки `bugFix` в ветку `master`"
             ],
             "afterMarkdowns": [
-              "Что мы видим? Во-первых, ветка master теперь указывает на коммит, у которого два родителя. Если проследовать по стрелкам от этого коммита, вы пройдёте через каждый коммит в дереве прямиком к началу. Это означает, что теперь в ветке `master` содержатся все изменения репозитория.",
+              "Что мы видим? Во-первых, ветка `master` теперь указывает на коммит, у которого два родителя. Если проследовать по стрелкам от этого коммита, вы пройдёте через каждый коммит в дереве прямиком к началу. Это означает, что теперь в ветке `master` содержатся все изменения репозитория.",
               "",
-              "Во-вторых, обрати внимание как изменились цвета коммитов. Мы ввели цветовую дифференциацию, чтобы помочь помниманию. Каждая ветка своего цвета. Каждый коммит становится того цвета, какого его ветка. Если в нём изменения сразу двух веток - он становится цветом, смешанным из цветов родительских веток.",
+              "Во-вторых, обрати внимание, как изменились цвета коммитов. Мы ввели цветовую дифференциацию, чтобы помочь пониманию. У каждой ветки — свой цвет. Каждый коммит становится того цвета, какого его ветка. Если в нём изменения сразу двух веток - он становится цветом, смешанным из цветов родительских веток.",
               "",
-              "И вот мы видим, что  цвет ветки `master` подмешан к каждому коммиту, а ветки `bugFix` - нет. Это можно поправить."
+              "И вот мы видим, что цвет ветки `master` подмешан к каждому коммиту, а ветки `bugFix` - нет. Это можно поправить."
             ],
             "command": "git merge bugFix",
             "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
@@ -704,7 +706,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Чтобы пройти этот уровень сделай следующее:",
+              "Чтобы пройти этот уровень, сделай следующее:",
               "",
               "* Создай новую ветку под названием `bugFix`",
               "* Переключись на новую ветку `bugFix` командой `git checkout bugFix`",
@@ -714,6 +716,75 @@ exports.level = {
               "* Слей ветку `bugFix` с веткой `master` при помощи `git merge`",
               "",
               "* Если что-то пошло не так - можешь подглядеть в эту шпаргалку командой \"objective\"!*"
+            ]
+          }
+        }
+      ]
+    },
+    "uk": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Гілки та їх Злиття",
+              "",
+              "Чудово! Ми знаємо як комітити та створювати гілки. Тепер потрібно навчитися в якийсь спосіб поєднувати інфу з двох чи більше гілок. Це дозволить нам відгілкуватись, зробити нову фічу, й потім інтегрувати її назад.",
+              "",
+              "Перший спосіб об’єднувати робочу інфу з яким ми розберемось це `git merge`. Команда merge (злити) в Git створює спеціальний коміт який має двох унікальних батьків. Коміт з двома батьками в приниципі просто значить що в нього включена інфа з обох батьків і всіх їх попередників.",
+              "",
+              "Це простіше сприймається візуально, тому розберемо це в наступному слайді"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Тут ми маємо дві гілки; кожна з них містить унікальний коміт. Це означає що жодна з них не містить повного набору \"робочої інфи\" в цьому репозиторії. Давайте зіллємо всю інфу докупи за допомогою merge.",
+              "",
+              "Ми `змержимо` гілку `bugFix` в `master`"
+            ],
+            "afterMarkdowns": [
+              "Нічого собі! Ви це бачили? По-перше, `master` тепер вказує на коміт з двома батьками. Якщо ти піднімешся вверх з цього коміту по дереву, починаючи з `master`, на шляху ти зустрінеш кожен коміт аж до кореневого. Це означає що гілка `master` тепер містить всю інфу в цьому репозиторії.",
+              "",
+              "А ти помітив як змінилися кольори комітів? Для кращого розуміння процесу я додав певну кольорову диференціацію. Кожен бранч виділено окремим кольором. Колір кожного коміту це суміш кольорів всіх гілок що місять цей коміт.",
+              "",
+              "Тож ми бачимо що колір гілки `master` містять всі коміти, але не колір `bugFix`. Давайте виправимо це..."
+            ],
+            "command": "git merge bugFix",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Давай змержимо `master` в `bugFix`:"
+            ],
+            "afterMarkdowns": [
+              "Так як `bugFix` є нащадком `master`, git'у не потрібно нічого робити; він просто пересунув `bugFix` на тей самий коміт, на якому знаходиться `master`.",
+              "",
+              "Тепер всі коміти одного кольору, що означає що кожен бранч включає в собі всю корисну інфу яка є в цьому репозиторії! Ура!"
+            ],
+            "command": "git checkout bugFix; git merge master",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit; git merge bugFix"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Щоб пройти цей рівень виконай наступні кроки:",
+              "",
+              "* Зроби нову гілку (branch) з назвою `bugFix`",
+              "* Перейди на кілку `bugFix` за допомогою `git checkout bugFix`",
+              "* Зроби один коміт",
+              "* Повернись до `master` за допомогою `git checkout`",
+              "* Зроби ще один коміт",
+              "* Змерджи (злий) гілку `bugFix` в `master` за допомогою `git merge`",
+              "",
+              "*Не забувай, ти можеш завжди повернутися до цього діалогу за допомогою \"objective\"!*"
             ]
           }
         }

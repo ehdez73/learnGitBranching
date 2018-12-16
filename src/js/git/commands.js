@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var escapeString = require('../util/escapeString');
 var intl = require('../intl');
 
 var Graph = require('../graph');
@@ -19,11 +19,15 @@ function isColonRefspec(str) {
 }
 
 var assertIsRef = function(engine, ref) {
-  engine.resolveID(ref); // will throw giterror if cant resolve
+  engine.resolveID(ref); // will throw git error if can't resolve
 };
 
 var validateBranchName = function(engine, name) {
   return engine.validateBranchName(name);
+};
+
+var validateOriginBranchName = function(engine, name) {
+  return engine.origin.validateBranchName(name);
 };
 
 var validateBranchNameIfNeeded = function(engine, name) {
@@ -103,7 +107,7 @@ var assertBranchIsRemoteTracking = function(engine, branchName) {
   if (!tracking) {
     throw new GitError({
       msg: intl.todo(
-        branchName + ' is not a remote tracking branch! I dont know where to push'
+        branchName + ' is not a remote tracking branch! I don\'t know where to push'
       )
     });
   }
@@ -117,6 +121,7 @@ var commandConfig = {
     options: [
       '--amend',
       '-a',
+      '--all',
       '-am',
       '-m'
     ],
@@ -125,7 +130,7 @@ var commandConfig = {
       command.acceptNoGeneralArgs();
 
       if (commandOptions['-am'] && (
-          commandOptions['-a'] || commandOptions['-m'])) {
+          commandOptions['-a'] || commandOptions['--all'] || commandOptions['-m'])) {
         throw new GitError({
           msg: intl.str('git-error-options')
         });
@@ -133,7 +138,7 @@ var commandConfig = {
 
       var msg = null;
       var args = null;
-      if (commandOptions['-a']) {
+      if (commandOptions['-a'] || commandOptions['--all']) {
         command.addWarning(intl.str('git-warning-add'));
       }
 
@@ -149,8 +154,13 @@ var commandConfig = {
         msg = args[0];
       }
 
+      if (commandOptions['--amend']) {
+        args = commandOptions['--amend'];
+        command.validateArgBounds(args, 0, 0, '--amend');
+      }
+
       var newCommit = engine.commit({
-        isAmend: commandOptions['--amend']
+        isAmend: !!commandOptions['--amend']
       });
       if (msg) {
         msg = msg
@@ -180,7 +190,7 @@ var commandConfig = {
 
       var set = Graph.getUpstreamSet(engine, 'HEAD');
       // first resolve all the refs (as an error check)
-      var toCherrypick = _.map(generalArgs, function(arg) {
+      var toCherrypick = generalArgs.map(function (arg) {
         var commit = engine.getCommitFromRef(arg);
         // and check that its not upstream
         if (set[commit.get('id')]) {
@@ -245,7 +255,7 @@ var commandConfig = {
         // get o/master locally if master is specified
         destination = engine.origin.refs[source].getPrefixedID();
       } else {
-        // cant be detached
+        // can't be detached
         if (engine.getDetachedHead()) {
           throw new GitError({
             msg: intl.todo('Git pull can not be executed in detached HEAD mode if no remote branch specified!')
@@ -263,7 +273,7 @@ var commandConfig = {
       engine.pull({
         source: source,
         destination: destination,
-        isRebase: commandOptions['--rebase']
+        isRebase: !!commandOptions['--rebase']
       });
     }
   },
@@ -279,10 +289,39 @@ var commandConfig = {
       }
 
       command.validateArgBounds(generalArgs, 0, 2);
-      // allow formats of: git Faketeamwork 2 or git Faketeamwork side 3
-      var branch = (engine.origin.refs[generalArgs[0]]) ?
-        generalArgs[0] : 'master';
-      var numToMake = parseInt(generalArgs[0], 10) || generalArgs[1] || 1;
+      var branch;
+      var numToMake;
+
+      // allow formats of: git fakeTeamwork 2 or git fakeTeamwork side 3
+      switch (generalArgs.length) {
+        // git fakeTeamwork
+        case 0:
+          branch = 'master';
+          numToMake = 1;
+          break;
+
+        // git fakeTeamwork 10 or git fakeTeamwork foo
+        case 1:
+          if (isNaN(parseInt(generalArgs[0], 10))) {
+            branch = validateOriginBranchName(engine, generalArgs[0]);
+            numToMake = 1;
+          } else {
+            numToMake = parseInt(generalArgs[0], 10);
+            branch = 'master';
+          }
+          break;
+
+        case 2:
+          branch = validateOriginBranchName(engine, generalArgs[0]);
+          if (isNaN(parseInt(generalArgs[1], 10))) {
+            throw new GitError({
+              msg: 'Bad numeric argument: ' + generalArgs[1]
+            });
+          }
+          numToMake = parseInt(generalArgs[1], 10);
+          break;
+
+      }
 
       // make sure its a branch and exists
       var destBranch = engine.origin.resolveID(branch);
@@ -291,7 +330,7 @@ var commandConfig = {
           msg: intl.str('git-error-options')
         });
       }
-        
+
       engine.fakeTeamwork(numToMake, branch);
     }
   },
@@ -375,6 +414,7 @@ var commandConfig = {
       '-d',
       '-D',
       '-f',
+      '--force',
       '-a',
       '-r',
       '-u',
@@ -391,7 +431,7 @@ var commandConfig = {
         names = names.concat(generalArgs);
         command.validateArgBounds(names, 1, Number.MAX_VALUE, '-d');
 
-        _.each(names, function(name) {
+        names.forEach(function(name) {
           engine.validateAndDeleteBranch(name);
         });
         return;
@@ -420,8 +460,9 @@ var commandConfig = {
         return;
       }
 
-      if (commandOptions['-f']) {
-        args = commandOptions['-f'].concat(generalArgs);
+      if (commandOptions['-f'] || commandOptions['--force']) {
+        args = commandOptions['-f'] || commandOptions['--force'];
+        args = args.concat(generalArgs);
         command.twoArgsImpliedHead(args, '-f');
 
         // we want to force a branch somewhere
@@ -478,7 +519,7 @@ var commandConfig = {
         command.addWarning(
           intl.str('git-warning-hard')
         );
-        // dont absorb the arg off of --hard
+        // don't absorb the arg off of --hard
         generalArgs = generalArgs.concat(commandOptions['--hard']);
       }
 
@@ -511,7 +552,7 @@ var commandConfig = {
     ],
     execute: function(engine, command) {
       var commandOptions = command.getOptionsMap();
-      var generalArgs = command.getGeneralArgs();
+      var generalArgs = command.getGeneralArgs().concat(commandOptions['--no-ff'] || []);
       command.validateArgBounds(generalArgs, 1, 1);
 
       var newCommit = engine.merge(
@@ -520,7 +561,7 @@ var commandConfig = {
       );
 
       if (newCommit === undefined) {
-        // its just a fast forwrard
+        // its just a fast forward
         engine.animationFactory.refreshTree(
           engine.animationQueue, engine.gitVisuals
         );
@@ -583,7 +624,7 @@ var commandConfig = {
       if (commandOptions['-i']) {
         var args = commandOptions['-i'].concat(generalArgs);
         command.twoArgsImpliedHead(args, ' -i');
-        
+
         if (commandOptions['--interactive-test']) {
           engine.rebaseInteractiveTest(
             args[0],
@@ -766,7 +807,7 @@ var commandConfig = {
       engine.describe(generalArgs[0]);
     }
   },
-  
+
   tag: {
     regex: /^git +tag($|\s)/,
     execute: function(engine, command) {
@@ -776,7 +817,7 @@ var commandConfig = {
         engine.printTags(tags);
         return;
       }
-      
+
       command.twoArgsImpliedHead(generalArgs);
       engine.tag(generalArgs[0], generalArgs[1]);
     }
@@ -789,7 +830,7 @@ var instantCommands = [
       intl.str('git-version'),
       '<br/>',
       intl.str('git-usage'),
-      _.escape(intl.str('git-usage-command')),
+      escapeString(intl.str('git-usage-command')),
       '<br/>',
       intl.str('git-supported-commands'),
       '<br/>'
@@ -797,9 +838,10 @@ var instantCommands = [
 
     var commands = require('../commands').commands.getOptionMap()['git'];
     // build up a nice display of what we support
-    _.each(commands, function(commandOptions, command) {
+    Object.keys(commands).forEach(function(command) {
+      var commandOptions = commands[command];
       lines.push('git ' + command);
-      _.each(commandOptions, function(vals, optionName) {
+      Object.keys(commandOptions).forEach(function(optionName) {
         lines.push('\t ' + optionName);
       }, this);
     }, this);
@@ -815,4 +857,3 @@ var instantCommands = [
 
 exports.commandConfig = commandConfig;
 exports.instantCommands = instantCommands;
-

@@ -2,7 +2,6 @@ var Backbone = require('backbone');
 var EventEmitter = require('events').EventEmitter;
 var React = require('react');
 
-var assign = require('object-assign');
 var util = require('../util');
 var intl = require('../intl');
 var LocaleStore = require('../stores/LocaleStore');
@@ -11,7 +10,7 @@ var LocaleActions = require('../actions/LocaleActions');
 /**
  * Globals
  */
-var events = assign(
+var events = Object.assign(
   {},
   EventEmitter.prototype,
   {
@@ -21,6 +20,8 @@ var events = assign(
     }
   }
 );
+// Allow unlimited listeners, so FF doesn't break
+events.setMaxListeners(0);
 var commandUI;
 var sandbox;
 var eventBaton;
@@ -84,12 +85,32 @@ var vcsModeRefresh = function(eventData) {
   $('body').toggleClass('hgMode', !isGit);
 };
 
+var insertAlternateLinks = function(pageId) {
+  // For now pageId is null, which would link to the main page.
+  // In future if pageId is provided this method should link to a specific page
+
+  // The value of the hreflang attribute identifies the language (in ISO 639-1 format)
+  // and optionally a region (in ISO 3166-1 Alpha 2 format) of an alternate URL
+
+  var altLinks = LocaleStore.getSupportedLocales().map(function(langCode) {
+    var url = "https://learngitbranching.js.org/?locale=" + langCode;
+    return '<link rel="alternate" hreflang="'+langCode+'" href="' + url +'" />';
+  });
+  var defaultUrl = "https://learngitbranching.js.org/?locale=" + LocaleStore.getDefaultLocale();
+  altLinks.push('<link rel="alternate" hreflang="x-default" href="' + defaultUrl +'" />');
+  $('head').prepend(altLinks);
+
+};
+
 var intlRefresh = function() {
   if (!window.$) { return; }
+  var countryCode = LocaleStore.getLocale().split("_")[0];
+  $("html").attr('lang', countryCode);
+  $("meta[http-equiv='content-language']").attr("content", countryCode);
   $('span.intl-aware').each(function(i, el) {
     var intl = require('../intl');
     var key = $(el).attr('data-intl');
-    $(el).text(intl.str(key).toUpperCase());
+    $(el).text(intl.str(key));
   });
 };
 
@@ -143,7 +164,7 @@ var initRootEvents = function(eventBaton) {
 var initDemo = function(sandbox) {
   var params = util.parseQueryString(window.location.href);
 
-  // being the smart programmer I am (not), I dont include a true value on demo, so
+  // being the smart programmer I am (not), I don't include a true value on demo, so
   // I have to check if the key exists here
   var commands;
   if (/(iPhone|iPod|iPad).*AppleWebKit/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) {
@@ -247,6 +268,8 @@ var initDemo = function(sandbox) {
     tryLocaleDetect();
   }
 
+  insertAlternateLinks();
+
   if (params.command) {
     var command = unescape(params.command);
     sandbox.mainVis.customEvents.on('gitEngineReady', function() {
@@ -257,20 +280,8 @@ var initDemo = function(sandbox) {
 };
 
 function tryLocaleDetect() {
-  // lets fire off a request to get our headers which then
-  // can help us identify what locale the browser is in.
-  // wrap everything in a try since this is a third party service
-  try {
-    $.ajax({
-      url: 'http://ajaxhttpheaders.appspot.com',
-      dataType: 'jsonp',
-      success: function(headers) {
-        changeLocaleFromHeaders(headers['Accept-Language']);
-      }
-    });
-  } catch (e) {
-    console.warn('locale detect fail', e);
-  }
+  // use navigator to get the locale setting
+  changeLocaleFromHeaders(navigator.language || navigator.browserLanguage);
 }
 
 function changeLocaleFromHeaders(langString) {
@@ -338,4 +349,3 @@ exports.getLevelDropdown = function() {
 };
 
 exports.init = init;
-

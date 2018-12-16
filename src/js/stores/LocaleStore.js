@@ -20,7 +20,8 @@ var langLocaleMap = {
   fr: 'fr_FR',
   de: 'de_DE',
   pt: 'pt_BR',
-  ru: 'ru_RU'
+  ru: 'ru_RU',
+  uk: 'uk'
 };
 
 var headerLocaleMap = {
@@ -28,6 +29,10 @@ var headerLocaleMap = {
   'zh-TW': 'zh_TW',
   'pt-BR': 'pt_BR'
 };
+
+var supportedLocalesList = Object.values(langLocaleMap)
+                                 .concat(Object.values(headerLocaleMap))
+                                 .filter(function (value, index, self) { return self.indexOf(value) === index;});
 
 function _getLocaleFromHeader(langString) {
   var languages = langString.split(',');
@@ -70,6 +75,10 @@ AppConstants.StoreSubscribePrototype,
 
   getLocale: function() {
     return _locale;
+  },
+
+  getSupportedLocales: function() {
+    return supportedLocalesList.slice();
   },
 
   dispatchToken: AppDispatcher.register(function(payload) {

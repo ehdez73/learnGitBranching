@@ -30,7 +30,7 @@ p {
 
 .fwber {
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 1.125em;
 }
 
 .githubLink {
@@ -70,6 +70,10 @@ body,
   display: -moz-box;
   display: -webkit-box;
   display: -ms-flexbox;
+}
+
+.contentHolder {
+  display: flex;
 }
 
 body,
@@ -253,7 +257,7 @@ body.hgMode .visBackgroundColor {
 
 #interfaceWrapper {
   min-width: 600px;
-  min-height: 600px;
+  min-height: 400px;
 }
 
 div.canvasTerminalHolder > div.terminal-window-holder > div.wrapper {
@@ -316,7 +320,7 @@ div.toolbar {
   position: relative;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 0.875em;
   color: #333;
 }
 
@@ -328,12 +332,12 @@ div.toolbar.level-toolbar {
   background-image: linear-gradient(top, #B2FF2E, #8AD247);
   border-radius: 0;
   height: inherit;
-  font-size: 12px;
+  font-size: 0.75em;
   position: relative;
 }
 
 div.toolbar.level-toolbar button {
-  font-size: 12px;
+  font-size: 0.75em;
   border: 1px solid #888;
   border-radius: 4px;
   padding: 4px 8px;
@@ -449,7 +453,7 @@ div.reactCommandView p.commandLine i {
 p.commandLine,
 div.commandLineResult {
   opacity: 1;
-  font-size: 16px;
+  font-size: 1em;
   margin: 0px;
 }
 
@@ -558,9 +562,11 @@ p.commandLine span.prompt {
 }
 
 #commandLineHistory {
+  height: 100%;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 1px 0px 15px rgba(100, 100, 100, 1);
+  overflow: auto;
 }
 
 #commandLineHistory #terminal.scrolling {
@@ -578,13 +584,19 @@ p.commandLine span.prompt {
   padding: 0px;
   margin: 0px;
   border: 0px;
-  position: absolute;
 }
 
-#prompt span.cursor {
-  background: #DDD;
-  opacity: 0;
-  margin-left: 12px;
+#prompt span.promptSign {
+  position: absolute;
+  bottom: 0px;
+}
+
+#prompt span.commandCursor {
+  background: #424242;
+}
+
+#prompt p.command.showCursor span.commandCursor {
+  background: #AEAEAE;
 }
 
 #prompt span.cursor.shown {
@@ -672,7 +684,7 @@ div.helperBar.show {
   -o-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
-  height: 70px;
+  height: 85px;
 }
 
 div.helperBar.show.BaseHelperBar {
@@ -698,7 +710,7 @@ div.helperBar.show.BaseHelperBar {
 p.helperText,
 div.terminal-text p.helperText,
 .iRebaseDialog p.helperText {
-  font-size: 10px;
+  font-size: 0.625em;
 }
 
 .iRebaseDialog p.solutionText {
@@ -755,7 +767,7 @@ li.rebaseEntry a#toggleButton {
   cursor: pointer;
   float: right;
   position: relative;
-  font-size: 14px;
+  font-size: 0.875em;
   top: -5px;
   right: -5px;
 }
@@ -763,6 +775,19 @@ li.rebaseEntry a#toggleButton {
 li.rebaseEntry.notPicked {
   opacity: 0.2;
 }
+
+li.rebaseEntry.notPicked span.showWhenPicked {
+  display: none;
+}
+
+li.rebaseEntry span.showWhenNotPicked {
+  display: none;
+}
+
+li.rebaseEntry.notPicked span.showWhenNotPicked {
+  display: inline;
+}
+
 /* Modal Views */
 
 div.modalView.box.inFront.show {
@@ -805,6 +830,7 @@ div.modalView.box.inFront.show {
 .modalView .terminal-window-holder {
   border-radius: 5px;
   max-width: 900px;
+  width: 90%;
 }
 
 .modalView .terminal-window {
@@ -869,7 +895,7 @@ div.seriesView p.levelInfo,
 div.seriesView p.about {
   margin: 0px;
   padding: 4px;
-  font-size: 12px;
+  font-size: 0.75em;
   color: #CCC;
 }
 
@@ -933,7 +959,7 @@ div.levelIcon.solved:active {
 div.levelIcon div.index {
   font-weight: 400;
   text-shadow: 1px 1px 2px #CCC, 0 2px 0 #C9C9C9;
-  font-size: 20px;
+  font-size: 1.125em;
   color: #333;
   -webkit-text-stroke: 1px #111;
 }
@@ -947,7 +973,7 @@ div.levelIcon.solved div.index i {
   color: white;
   -webkit-text-stroke: 0;
   text-shadow: none;
-  font-size: 30px;
+  font-size: 2em;
 }
 
 div.levelIcon.solved div.index div.indexNum {
@@ -1085,7 +1111,7 @@ div.gitDemonstrationView {
 /* LeftRightView */
 
 .leftRightView div i {
-  font-size: 45px;
+  font-size: 2.75em;
   cursor: pointer;
 }
 
@@ -1236,42 +1262,3 @@ div.gitDemonstrationView {
   border-top-color: #9bcbeb;
   background: #9bcbeb;
 }
-
-
-/* Go Home Firefox, you're drunk */
-@-moz-document url-prefix() {
-  div.wrapper.box.vertical {
-    -moz-box-flex: 3;
-    box-flex: 3;
-  }
-
-  div.toolbar.level-toolbar.box.vertical.center.transitionAll {
-    width: 100%;
-  }
-
-  div.controls.box.horizontal.justify {
-    left: 0 !important;
-    top: -4px !important;
-  }
-
-  body {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  #commandLineBar {
-    min-height: 30px;
-  }
-
-  #interfaceWrapper {
-    width: 100%;
-    height: 100%;
-  }
-
-  div.canvasTerminalHolder > div.terminal-window-holder {
-    height: 80%;
-    margin: 7% 0;
-  }
-}
-

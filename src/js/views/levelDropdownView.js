@@ -4,6 +4,7 @@ var Backbone = require('backbone');
 var LocaleStore = require('../stores/LocaleStore');
 
 var util = require('../util');
+var debounce = require('../util/debounce');
 var intl = require('../intl');
 var log = require('../log');
 var KeyboardListener = require('../util/keyboard').KeyboardListener;
@@ -33,15 +34,15 @@ var LevelDropdownView = ContainedBase.extend({
       selectedTab: queryParams.defaultTab || 'main',
       tabs: [{
         id: 'main',
-        name: intl.todo('Main')
+        name: intl.str('main-levels-tab')
       }, {
         id: 'remote',
-        name: intl.todo('Remote')
+        name: intl.str('remote-levels-tab')
       }]
     };
 
-    this.navEvents = _.clone(Backbone.Events);
-    this.navEvents.on('clickedID', _.debounce(
+    this.navEvents = Object.assign({}, Backbone.Events);
+    this.navEvents.on('clickedID', debounce(
       this.loadLevelID.bind(this),
       300,
       true
@@ -86,6 +87,13 @@ var LevelDropdownView = ContainedBase.extend({
   },
 
   render: function() {
+    this.container.updateTitle(
+      intl.str('select-a-level')
+    );
+    this.updateTabNames([
+      intl.str('main-levels-tab'),
+      intl.str('remote-levels-tab')
+    ]);
     LevelDropdownView.__super__.render.apply(this, arguments);
     this.buildSequences();
   },
@@ -107,6 +115,12 @@ var LevelDropdownView = ContainedBase.extend({
       this.selectedSequence = this.getSequencesOnTab()[0];
       this.selectedIndex = 0;
       this.updateSelectedIcon();
+    }
+  },
+
+  updateTabNames: function(names) {
+    for(var index = 0; index < names.length; ++index) {
+      this.JSON.tabs[index].name = names[index];
     }
   },
 
@@ -198,7 +212,7 @@ var LevelDropdownView = ContainedBase.extend({
   },
 
   getTabIndex: function() {
-    var ids = _.map(this.JSON.tabs, function(tab) {
+    var ids = this.JSON.tabs.map(function(tab) {
       return tab.id;
     });
     return ids.indexOf(this.JSON.selectedTab);
@@ -222,7 +236,7 @@ var LevelDropdownView = ContainedBase.extend({
   },
 
   getSequencesOnTab: function() {
-    return _.filter(this.sequences, function(sequenceName) {
+    return this.sequences.filter(function(sequenceName) {
       var tab = LEVELS.getTabForSequence(sequenceName);
       return tab === this.JSON.selectedTab;
     }, this);
@@ -279,7 +293,7 @@ var LevelDropdownView = ContainedBase.extend({
     $(selector).toggleClass('selected', value);
 
     // also go find the series and update the about
-    _.each(this.seriesViews, function(view) {
+    this.seriesViews.forEach(function(view) {
       if (view.levelIDs.indexOf(id) === -1) {
         return;
       }
@@ -330,14 +344,14 @@ var LevelDropdownView = ContainedBase.extend({
   },
 
   updateSolvedStatus: function() {
-    _.each(this.seriesViews, function(view) {
+    this.seriesViews.forEach(function(view) {
       view.updateSolvedStatus();
     }, this);
   },
 
   buildSequences: function() {
     this.seriesViews = [];
-    _.each(this.getSequencesOnTab(), function(sequenceName) {
+    this.getSequencesOnTab().forEach(function(sequenceName) {
       this.seriesViews.push(new SeriesView({
         destination: this.$el,
         name: sequenceName,
@@ -364,7 +378,7 @@ var SeriesView = BaseView.extend({
 
     this.levelIDs = [];
     var firstLevelInfo = null;
-    _.each(this.levels, function(level) {
+    this.levels.forEach(function(level) {
       if (firstLevelInfo === null) {
         firstLevelInfo = this.formatLevelAbout(level.id);
       }
@@ -431,4 +445,3 @@ var SeriesView = BaseView.extend({
 });
 
 exports.LevelDropdownView = LevelDropdownView;
-

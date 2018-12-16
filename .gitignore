@@ -1,12 +1,10 @@
-# NPM
+# NPM and Yarn
 npm-debug.log
+yarn-error.log
 node_modules/
 
 # Build artifacts and asset stuff
 build/*
-build/bundle.js
-build/bundle.*.js
-build/main.*.css
 screens
 FontAwesome-Vectors.pdf
 index.html
@@ -17,16 +15,11 @@ index.html
 # Annoying mac stuff
 .DS_STORE
 
-# Casper stuff
-src/__tests__/casperjs/screenshots/*.png
-src/__tests__/casperjs/*.js-e
-
 # Xcode
 *.xcuserstate
 *.xcworkspace
 xcuserdata
 UserInterfaceState.xcuserstate
-xcuserdata/
 
 *.pbxuser
 *.perspective
@@ -44,7 +37,6 @@ xcuserdata/
 
 .User.xcconfig
 
-xcuserdata
 Tools/xctool/build
 Tools/clang/analyzer/build
 Tools/clang/libtooling/build
@@ -54,7 +46,3 @@ VendorLib/Breakpad/src/tools/mac/dump_syms/build
 DerivedData
 VendorLib/clang/lib/arc
 VendorLib/clang/lib/c++
-
-*.swp
-
-

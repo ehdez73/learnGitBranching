@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var util = require('../util');
 
 var constants = require('../util/constants');
@@ -98,7 +97,7 @@ var instantCommands = [
       intl.str('show-all-commands'),
       '<br/>'
     ];
-    _.each(allCommands, function(regex, command) {
+    allCommands.forEach(function(regex, command) {
       lines.push(command);
     });
 
@@ -125,7 +124,8 @@ var regexMap = {
   'importLevelNow': /^importLevelNow($|\s)/,
   'import tree': /^import +tree$/,
   'import level': /^import +level$/,
-  'undo': /^undo($|\s)/
+  'undo': /^undo($|\s)/,
+  'share permalink': /^share( +permalink)?$/
 };
 
 var getAllCommands = function() {
@@ -133,17 +133,20 @@ var getAllCommands = function() {
     'mobileAlert'
   ];
 
-  var allCommands = _.extend(
+  var allCommands = Object.assign(
     {},
     require('../level').regexMap,
     regexMap
   );
-  _.each(Commands.commands.getRegexMap(), function(map, vcs) {
-    _.each(map, function(regex, method) {
+  var mRegexMap = Commands.commands.getRegexMap();
+  Object.keys(mRegexMap).forEach(function(vcs) {
+    var map = mRegexMap[vcs];
+    Object.keys(map).forEach(function(method) {
+      var regex = map[method];
       allCommands[vcs + ' ' + method] = regex;
     });
   });
-  _.each(toDelete, function(key) {
+  toDelete.forEach(function(key) {
     delete allCommands[key];
   });
 

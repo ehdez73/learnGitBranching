@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var Backbone = require('backbone');
 var GRAPHICS = require('../util/constants').GRAPHICS;
 
@@ -89,13 +88,13 @@ var VisTag = VisBase.extend({
 
   getTagStackIndex: function() {
     if (this.get('isHead')) {
-      // head is never stacked with other Tages
+      // head is never stacked with other Tags
       return 0;
     }
 
     var myArray = this.getTagStackArray();
     var index = -1;
-    _.each(myArray, function(Tag, i) {
+    myArray.forEach(function(Tag, i) {
       if (Tag.obj == this.get('tag')) {
         index = i;
       }
@@ -163,7 +162,7 @@ var VisTag = VisBase.extend({
   getTextSize: function() {
     var getTextWidth = function(visTag) {
       var textNode = (visTag.get('text')) ? visTag.get('text').node : null;
-      return (textNode === null) ? 0 : textNode.clientWidth;
+      return (textNode === null) ? 0 : textNode.getBoundingClientRect().width;
     };
 
     var firefoxFix = function(obj) {
@@ -175,7 +174,7 @@ var VisTag = VisBase.extend({
     var textNode = this.get('text').node;
 
     var maxWidth = 0;
-    _.each(this.getTagStackArray(), function(Tag) {
+    this.getTagStackArray().forEach(function(Tag) {
       maxWidth = Math.max(maxWidth, getTextWidth(
         Tag.obj.get('visTag')
       ));
@@ -219,7 +218,7 @@ var VisTag = VisBase.extend({
     var name = this.get('tag').getName();
     var isRemote = this.getIsRemote();
     var isHg = this.gitEngine.getIsHg();
-    
+
     return name;
   },
 
@@ -251,7 +250,7 @@ var VisTag = VisBase.extend({
     var textPos = this.getTextPosition();
     var name = this.getName();
 
-    // when from a reload, we dont need to generate the text
+    // when from a reload, we don't need to generate the text
     var text = paper.text(textPos.x, textPos.y, String(name));
     text.attr({
       'font-size': 14,
@@ -271,7 +270,7 @@ var VisTag = VisBase.extend({
 
     // set CSS
     var keys = ['text', 'rect'];
-    _.each(keys, function(key) {
+    keys.forEach(function(key) {
       $(this.get(key).node).css(attr.css);
     }, this);
 
@@ -289,7 +288,7 @@ var VisTag = VisBase.extend({
       this.get('text')
     ];
 
-    _.each(objs, function(rObj) {
+    objs.forEach(function(rObj) {
       rObj.click(this.onClick.bind(this));
     }, this);
   },
@@ -341,7 +340,7 @@ var VisTag = VisBase.extend({
     if (this.getIsGoalAndNotCompared()) {
       return this.get('stroke-width') / 5.0;
     }
-    
+
     return this.get('stroke-width');
   },
 
@@ -405,4 +404,3 @@ var VisTagCollection = Backbone.Collection.extend({
 exports.VisTagCollection = VisTagCollection;
 exports.VisTag = VisTag;
 exports.randomHueString = randomHueString;
-

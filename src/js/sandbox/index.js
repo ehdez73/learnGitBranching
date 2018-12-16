@@ -72,7 +72,7 @@ var Sandbox = Backbone.View.extend({
   },
 
   takeControl: function() {
-    // we will be handling commands that are submitted, mainly to add the sanadbox
+    // we will be handling commands that are submitted, mainly to add the sandbox
     // functionality (which is included by default in ParseWaterfall())
     Main.getEventBaton().stealBaton('commandSubmitted', this.commandSubmitted, this);
     // we obviously take care of sandbox commands
@@ -223,6 +223,16 @@ var Sandbox = Backbone.View.extend({
     });
   },
 
+  sharePermalink: function(command, deferred) {
+    var treeJSON = JSON.stringify(this.mainVis.gitEngine.exportTree());
+    var url =
+      'https://learngitbranching.js.org/?NODEMO&command=importTreeNow%20' + escape(treeJSON);
+    command.setResult(
+      intl.todo('Here is a link to the current state of the tree: ') + '\n' + url
+    );
+    command.finishWith(deferred);
+  },
+
   resetSolved: function(command, deferred) {
     LevelActions.resetLevelsSolved();
     command.addWarning(
@@ -232,7 +242,7 @@ var Sandbox = Backbone.View.extend({
   },
 
   processSandboxCommand: function(command, deferred) {
-    // I'm tempted to do camcel case conversion, but there are
+    // I'm tempted to do cancel case conversion, but there are
     // some exceptions to the rule
     var commandMap = {
       'reset solved': this.resetSolved,
@@ -253,6 +263,7 @@ var Sandbox = Backbone.View.extend({
       'importTreeNow': this.importTreeNow,
       'import level': this.importLevel,
       'importLevelNow': this.importLevelNow,
+      'share permalink': this.sharePermalink,
     };
 
     var method = commandMap[command.get('method')];
@@ -301,6 +312,7 @@ var Sandbox = Backbone.View.extend({
       command.set('error', new Errors.GitError({
         msg: 'Something went wrong ' + String(e)
       }));
+      throw e;
     }
     command.finishWith(deferred);
   },
@@ -464,4 +476,3 @@ var Sandbox = Backbone.View.extend({
 });
 
 exports.Sandbox = Sandbox;
-

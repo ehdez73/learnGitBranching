@@ -15,9 +15,10 @@ exports.level = {
     "fr_FR": "Rebaser plus de 1000 fois",
     "ko": "9천번이 넘는 리베이스",
     "ja"   : "9000回以上のrebase",
-    "zh_CN": "N次Rebase",
+    "zh_CN": "多次 Rebase",
     "zh_TW": "N次Rebase",
-    "ru_RU": "Rebase over 9000 раз"
+    "ru_RU": "Rebase over 9000 раз",
+    "uk"   : "Rebase over 9000 разів"
   },
   "hint": {
     "en_US": "Remember, the most efficient way might be to only update master at the end...",
@@ -27,9 +28,10 @@ exports.level = {
     "fr_FR": "Rappelez-vous, la façon la plus efficace peut être de mettre à jour master seulement à la fin ...",
     "ja"   : "最も効率的なやり方はmasterを最後に更新するだけかもしれない・・・",
     "ko": "아마도 master를 마지막에 업데이트하는 것이 가장 효율적인 방법일 것입니다...",
-    "zh_CN": "记住，最后更新master分支可能是最高效的方法。",
+    "zh_CN": "记住，最后更新 master 分支可能是最高效的方法……",
     "zh_TW": "要記住喔! 把 master branch 留到最後更新可能是最有效率的方法。",
-    "ru_RU": "Не забудь, что лучше всего сдвинуть мастер в самом конце..."
+    "ru_RU": "Не забудь, что лучше всего сдвинуть мастер в самом конце...",
+    "uk"   : "Не забувай, що краще всього буде перемістити master в самому кінці... "
   },
   "startDialog": {
     "en_US": {
@@ -116,7 +118,7 @@ exports.level = {
               "",
               "Die Führungsetage macht die Sache allerdings etwas trickreicher -- die möchten, dass alle Commits in aufsteigender Reihenfolge geordnet sind. Das heißt unser fertiger Baum sollte `C7` ganz unten haben, darüber `C6` und so weiter und so fort.",
               "",
-              "Wenn du irgendwo einen Fehler machst, benutz ruhig `reset` um wieder von vorne anzufangen oder `undo` um einen Schrit zurückzugehen. Schau dir die Lösung an und versuch es in weniger Schritten hinzubekommen, als die."
+              "Wenn du irgendwo einen Fehler machst, benütze ruhig `reset` um wieder von vorne anzufangen oder `undo` um einen Schritt zurückzugehen. Schau dir die Lösung an und versuch es in weniger Schritten hinzubekommen."
             ]
           }
         }
@@ -146,13 +148,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "### 多分支衍合",
+              "### 多分支 rebase",
               "",
-              "呐，现在我们有很多分支啦！让我们rebase这些分支的工作到 master 分支上吧。",
+              "哥们儿，我们准备了很多分支！咱们把这些分支 rebase 到 master 上吧。",
               "",
-              "但是你的头头找了点麻烦 —— 他们希望得到有序的提交历史，也就是我们最终的结果是 `C7'` 在最底部，`C6'` 在它上面，以此类推。",
+              "但是你的领导给你提了点要求 —— 他们希望得到有序的提交历史，也就是我们最终的结果应该是 `C6'` 在 `C7'` 上面， `C5'` 在 `C6'` 上面，依此类推。",
               "",
-              "假如你搞砸了，没所谓的（虽然我不会告诉你用 `reset` 可以重新开始）。记得看看我们提供的答案，看你能否使用更少的命令完成任务！"
+              "即使你搞砸了也没关系，用 `reset` 命令就可以重新开始了。记得看看我们提供的答案，看你能否使用更少的命令来完成任务！"
             ]
           }
         }
@@ -204,9 +206,27 @@ exports.level = {
               "",
               "У нас тут куча веток! Было бы круто перенести все изменения из них в мастер.",
               "",
-              "Но начальство усложняет нашу задачу тем, что желает видеть все коммиты по порядку. Так что коммит С7' должен идти после коммита С6' и так далее.",
+              "Но начальство усложняет нашу задачу тем, что желает видеть все коммиты по порядку. Так что коммит `С7'` должен идти после коммита `С6'` и так далее.",
               "",
               "Если что-то пойдёт не так – не надо стесняться использовать `reset`, чтобы начать всё с чистого листа. Постарайся сделать как можно меньше манипуляций!"
+            ]
+          }
+        }
+      ]
+    },
+    "uk": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Ребейсимо кілька гілок",
+              "",
+              "В нас тут до біса гілок! Перенесімо всі зміни з різних гілок в master.",
+              "",
+              "Але вище керівництво нам не полегшує життя -- вони хочуть, щоб всі коміти були впорядковані. Це означає, що в результаті коміт `C7'` має бути з самого низу, `C6'` трохи вище, і так далі, все за порядком.",
+              "",
+              "Якщо ти щось зробиш не так, сміливо використовуй `reset` щоб почати спочатку. Подивись на наш розв’язок і подумай, чи ти можеш обійтись меншою кількістю команд!"
             ]
           }
         }

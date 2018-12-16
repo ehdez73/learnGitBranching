@@ -9,9 +9,10 @@
 
   <meta property="og:title" content="Learn Git Branching"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="http://pcottle.github.io/learnGitBranching/index.html?demo"/>
-  <meta property="og:image" content="http://pcottle.github.io/learnGitBranching/assets/learnGitBranching.png"/>
-  <meta property="og:description" content="A interactive Git visualization tool to educate and challenge!"/>
+  <meta property="og:url" content="https://pcottle.github.io/learnGitBranching/index.html?demo"/>
+  <meta property="og:image" content="https://pcottle.github.io/learnGitBranching/assets/learnGitBranching.png"/>
+  <meta property="og:description" content="An interactive Git visualization tool to educate and challenge!"/>
+  <meta http-equiv="content-language" content="en">
 
   <link rel="stylesheet" href="build/{{styleFile}}" type="text/css" charset="utf-8">
   <link rel="stylesheet" href="src/style/font-awesome.css" type="text/css" charset="utf-8">
@@ -66,7 +67,13 @@
             <span class="cursor box">&nbsp;</span>
             <p class="command"></p>
           </div>
-          <textarea id="commandTextField"></textarea>
+          <textarea
+						autocomplete="off"
+						autocorrect="off"
+						autocapitalize="off"
+						spellcheck="false"
+						id="commandTextField">
+					</textarea>
         </div>
 
       </div>
@@ -183,10 +190,14 @@
               </div>
             </div>
           </div>
-          <div>
-            <i class="icon-cog"></i>
-            <%= title %>
-          </div>
+          <% if (title) { %>
+            <div>
+              <i class="icon-cog"></i>
+              <span class="modal-title">
+                <%= title %>
+              </span>
+            </div>
+          <% } %>
         </div>
 
         <div class="inside">
@@ -249,7 +260,11 @@
 
       <div class="command center">
         <p class="uiButton uiButtonYellow transitionOpacity">
-          <%= command %>
+        <!--
+          we strip aboveAll since its just an
+          implementation detail for the UI and confusing
+        -->
+          <%= command.replace(' --aboveAll', '') %>
         </p>
       </div>
 
@@ -380,7 +395,7 @@
       <% if (solutionOrder && solutionOrder.length) { %>
         <p class="solutionText">
           For the solution, order the commits as
-            <%= solutionOrder.join(', ') %>
+            <%= solutionOrder.join(', ') %>. You may need to omit or pick commits.
         </p>
       <% } %>
       <p class="helperText">
@@ -438,7 +453,12 @@
           <%= id %>
         </span>
         <a id="toggleButton" class="uiButton uiButtonPink">
-          Pick
+          <span class="showWhenPicked">
+            Omit
+          </span>
+          <span class="showWhenNotPicked">
+            Pick
+          </span>
         </a>
       </div>
     </li>
